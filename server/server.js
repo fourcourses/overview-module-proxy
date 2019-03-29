@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-//const db = require('../database/index');
+const db = require('../database/index.js');
 const port = 3000;
 
 const app = express();
@@ -19,6 +19,8 @@ app.post('/repos', function (req, res) {
   console.log('GOT POST REQUEST');
 });
 
-app.get('/repos', function (req, res) {
+app.get('/restaurant/overview', function (req, res) {
   console.log('Get Request!')
+  return db.search()
+  .then(result => res.send(result));
 });
