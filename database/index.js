@@ -30,9 +30,9 @@ let Restaurant = mongoose.model('Restaurant', resSchema);
 //   .then(() => console.log('Successfully Inserted'));
 // }
 
-let search = () => {
+let search = (id) => {
   console.log('searching');
-  return Restaurant.find().sort().limit(25)
+  return Restaurant.find({id: id}).sort().limit(25)
 }
 
 // module.exports.save = save;
