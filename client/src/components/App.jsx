@@ -13,8 +13,10 @@ class App extends React.Component {
     this.state = { 
       restaurant: null,
       currentImage: 2,
+      restaurantId: 1,
       images: ['https://i.imgur.com/i2FffSR.jpg', 'https://i.imgur.com/rd9yHKH.jpg', 'https://i.imgur.com/ocPGEcz.jpg', 'https://i.imgur.com/noBxGLl.jpg', 'https://i.imgur.com/yajIWRO.jpg']
     }
+    this.handleModal = this.handleModal.bind(this)
   }
 
   componentDidMount(){
@@ -23,7 +25,7 @@ class App extends React.Component {
 
   getData() {
     $.ajax({
-      url: '/restaurant/overview',
+      url: `/restaurant?restaurant=${this.state.restaurantId}`,
       method: 'GET',
       dataType: 'json',
       success: (data) => {
@@ -72,15 +74,13 @@ class App extends React.Component {
     }
   }
 
-
-
   render() {
     return (
       <div>
       {this.state.restaurant !== null ? 
       <div>
-        <Header handleModal={this.handleModal.bind(this)} />
-        <Modal handleModal={this.handleModal.bind(this)} state={this.state}/>
+        <Header handleModal={this.handleModal} />
+        <Modal handleModal={this.handleModal} state={this.state}/>
         <div className="overview-container">
           <div className="overview">
             <Navbar />
