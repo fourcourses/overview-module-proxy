@@ -19,8 +19,8 @@ app.post('/repos', function (req, res) {
   console.log('GOT POST REQUEST');
 });
 
-app.get('/restaurant/overview', function (req, res) {
-  console.log('Get Request!')
-  return db.search()
+app.get('/restaurant', function (req, res) {
+  console.log('Get Request!', req.query.restaurant)
+  return db.search(req.query.restaurant)
   .then(result => res.send(result));
 });
