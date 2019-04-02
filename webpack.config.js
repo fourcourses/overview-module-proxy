@@ -1,15 +1,4 @@
 module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.jsx$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        }
-      }
-    ]
-  },
   entry: __dirname + '/client/src/index.jsx',
   module: {
     rules: [
@@ -36,3 +25,14 @@ module.exports = {
   }
 };
 
+  // module: {
+  //   rules: [
+  //     {
+  //       test: /\.jsx$/,
+  //       exclude: /node_modules/,
+  //       use: {
+  //         loader: 'babel-loader'
+  //       }
+  //     }
+  //   ]
+  // },
