@@ -12,7 +12,7 @@ class App extends React.Component {
     super(props);
     this.state = { 
       restaurant: null,
-      currentImage: 2,
+      currentImage: 0,
       restaurantId: 1,
       images: ['https://i.imgur.com/i2FffSR.jpg', 'https://i.imgur.com/rd9yHKH.jpg', 'https://i.imgur.com/ocPGEcz.jpg', 'https://i.imgur.com/noBxGLl.jpg', 'https://i.imgur.com/yajIWRO.jpg']
     }
@@ -25,16 +25,16 @@ class App extends React.Component {
   
 
   getData() {
-    $.ajax({
+    return $.ajax({
       url: `/restaurant?restaurant=${this.state.restaurantId}`,
       method: 'GET',
       dataType: 'json',
       success: (data) => {
-      console.log('success', data)
-      this.setState({
-        restaurant: data[0]
-      })
-    },
+        console.log('success', data)
+        this.setState({
+          restaurant: data
+        })
+      },
       error: () => {console.log('error')}
     })    
   }
