@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Modal = (props) => {
-  console.log('images', props.state.images.length)
+  //console.log('images', props.state.images.length)
   return (
     <div id="myModal" className="modal">
     <span id="closeModal" unselectable="on" className="close" onClick={(e) => {props.handleModal(e)}}>&times;</span>

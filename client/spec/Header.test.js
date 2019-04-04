@@ -3,7 +3,6 @@ import { shallow, mount } from 'enzyme';
 
 import Header from '../src/components/Header.jsx';
 
-
 describe('Header', () => {
   it('should render correctly in "debug" mode', () => {
     const component = shallow(<Header debug/>);

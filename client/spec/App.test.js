@@ -1,11 +1,7 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import ReactTestUtils from 'react-dom/test-utils';
 
 import App from '../src/components/App.jsx';
-import { cpus } from 'os';
-//import { getData } from '../src/components/App.jsx'
-
 
 describe('App', () => {
   it('should render correctly in "debug" mode', () => {
@@ -20,21 +16,23 @@ describe('App', () => {
     expect(component).toMatchSnapshot();
   })
 
-  it('gets data from server', () => {
-    const rendered = ReactTestUtils.renderIntoDocument(
-      <App />
-    );
-      expect(rendered.state.restaurant.length).toEqual(2);
+  it("renders", () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper.exists()).toBe(true);
+  })
 
+  it('App component calls function to fetch data', () => {
+    const spy = jest.spyOn(App.prototype, "getData");
+    const wrapper = shallow(<App />);
+    expect(spy).toHaveBeenCalled();
+    spy.mockRestore();
   });
 
-  it('can send a get get request', () => {
-    const component = shallow(<App />);
-    return component.instance().getData().then((data) => {
-      expect(data).toHaveLength(2);
-    })
-    // component.instance().getData();
-    // expect(component.instance().getData().data).toHaveLength(2);
-    //expect(component.instance().getData()).toBe(true);
-  })
+  it('calls function handlesModal', () => {
+    const spy = jest.spyOn(App.prototype, "handleModal");
+    const wrapper = mount(<App />);
+    spy({target: "myModal"});
+    expect(spy).toHaveBeenCalled();
+    spy.mockRestore();
+  });
 });

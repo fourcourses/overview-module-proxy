@@ -20,6 +20,7 @@ app.post('/repos', function (req, res) {
 });
 
 app.get('/restaurant', function (req, res) {
+  console.log(db)
   console.log('Get Request!', req.query.restaurant)
   return db.search(req.query.restaurant)
   .then(result => res.send(result));

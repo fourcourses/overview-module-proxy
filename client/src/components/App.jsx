@@ -14,7 +14,7 @@ class App extends React.Component {
       restaurant: null,
       currentImage: 0,
       restaurantId: 1,
-      images: ['https://i.imgur.com/i2FffSR.jpg', 'https://i.imgur.com/rd9yHKH.jpg', 'https://i.imgur.com/ocPGEcz.jpg', 'https://i.imgur.com/noBxGLl.jpg', 'https://i.imgur.com/yajIWRO.jpg']
+      images: null
     }
     this.handleModal = this.handleModal.bind(this)
   }
@@ -32,8 +32,10 @@ class App extends React.Component {
       success: (data) => {
         console.log('success', data)
         this.setState({
-          restaurant: data
+          restaurant: data[0],
+          images: data[0].imageUrl
         })
+        $('.headerImg').css('background', `url(${data[0].imageUrl[0]}) center center`)
       },
       error: () => {console.log('error')}
     })    
@@ -41,16 +43,16 @@ class App extends React.Component {
 
   handleModal(e) {
     console.log('Clicked', e.target.id)
-    if(e.target.id !== "bookmark"){
+    if(e.target.id !== "bookmark" && document.getElementById('myModal') !== null){
     document.getElementById('myModal').style.display = "block";
     this.setState({
       currentImage: 0
     })
     }
-    if (e.target.id === "closeModal"){
+    if (e.target.id === "closeModal" && document.getElementById('closeModal') !== null){
       document.getElementById('myModal').style.display = "none";
     }
-    if (e.target.id === "previousImage"){
+    if (e.target.id === "previousImage" && document.getElementById('previousImage') !== null){
       console.log('Previous')
       if (this.state.currentImage === 0){
         this.setState({
@@ -61,7 +63,7 @@ class App extends React.Component {
         currentImage: this.state.currentImage - 1
       })}
     }
-    if (e.target.id === "nextImage"){
+    if (e.target.id === "nextImage" && document.getElementById('nextImage') !== null){
       console.log('Next')
       console.log(this.state.currentImage, this.state.images.length - 1)
       if (this.state.currentImage === this.state.images.length - 1){
@@ -95,19 +97,5 @@ class App extends React.Component {
     )
   }
 }
-
-$(document).ready(function(){
-  console.log('test');
-  $("a").on('click', function(event) {
-    if (this.hash !== "") {
-      event.preventDefault();
-      var hash = this.hash;
-      $('html, body').animate({
-        scrollTop: $(hash).offset().top - 45
-      }, 400, function(){
-      });
-    }
-  });
-});
 
 export default App;

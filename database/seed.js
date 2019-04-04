@@ -5,19 +5,37 @@ const faker = require('faker');
 
 
 for (var i = 0; i < 5; i++){
+
+const photoArray = [];
+for (var j = 0; j < 5; j++){
+  var randomNum = Math.floor(Math.random() * 25 + 1);
+  photoArray.push(`https://s3-us-west-1.amazonaws.com/hrsf113fec/${randomNum}.jpg`)
+}
+
+const tags = [];
+for(var j = 0; j < 5; j++){
+  tags.push(faker.random.word())
+}
+
+const types = [];
+for(var j = 0; j < 3; j++){
+  types.push(faker.random.word())
+}
+
+
 const samplePosts = [{ 
 	id: faker.random.number(5),
   name: faker.random.word(),
   description: faker.lorem.paragraphs(3),
-  imageUrl: ['https://i.imgur.com/jvl5mdI.jpg', 'https://i.imgur.com/AFT1cI6.jpg', 'https://i.imgur.com/rd9yHKH.jpg'],
+  imageUrl: photoArray,
 	reviews: faker.random.number(3),
 	rating: faker.random.number(1),
-	tags: ['tag1', 'tag2', 'tag3', 'tag4', 'tag5'],
+	tags: tags,
 	priceRange: {
                 start: faker.random.number(4),
                 end: faker.random.number(9)
                 },
-	type: ['french', 'german']
+	type: types
 }];
 
 const insertSampleBlogs = function() {
@@ -29,13 +47,3 @@ insertSampleBlogs();
 
 }
 
-
-
-// const RestaurantOverView = {
-//   name: faker.name.findName(),
-//   email: faker.internet.email(),
-//   website: faker.internet.url(),
-//   address: faker.address.streetAddress() + faker.address.city() + faker.address.country(),
-//   bio: faker.lorem.sentences(),
-//   image: faker.image.avatar()
-// }
