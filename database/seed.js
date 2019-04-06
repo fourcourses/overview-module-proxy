@@ -1,5 +1,4 @@
 const db  = require('./index.js');
-console.log('db', db.Restaurant);
 const Restaurant = require('./index.js');
 const faker = require('faker');
 

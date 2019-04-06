@@ -4,6 +4,7 @@ import Modal from './Modal.jsx';
 import Navbar from './Navbar.jsx';
 import Description from './Description.jsx';
 import Footer from './Footer.jsx';
+import Photos from './Photos.jsx';
 
 import $ from 'jquery';
 
@@ -88,6 +89,25 @@ class App extends React.Component {
           <div className="overview">
             <Navbar />
             <Description restaurant={this.state.restaurant}/>
+            <Photos />
+
+              <div className="foodmenu" id="menu">Menu
+              Category: Food<br></br>
+              One Food<br></br>
+              $30<br></br>
+              </div>
+
+              <div className="details" id="details">Details
+              there is parking outside<br></br>
+              is by the street<br></br>
+              buy one get one full price<br></br>
+              </div>
+
+              <div className="reviews" id="reviews">Non Shill Comments
+              hello<br></br>
+              wow very good and cool food<br></br>
+              this food was satisfying for my taste buds and it fulfills 1/3 of my daily calorie intake goals, yum!<br></br>
+              </div>
           </div>
         </div>
         <Footer />
