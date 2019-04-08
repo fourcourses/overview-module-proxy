@@ -6,9 +6,10 @@ const faker = require('faker');
 for (var i = 0; i < 5; i++){
 
 const photoArray = [];
-for (var j = 0; j < 5; j++){
+for (var j = 0; j < 10; j++){
   var randomNum = Math.floor(Math.random() * 25 + 1);
-  photoArray.push(`https://s3-us-west-1.amazonaws.com/hrsf113fec/${randomNum}.jpg`)
+  photoArray.push({imageUrl: `https://s3-us-west-1.amazonaws.com/hrsf113fec/${randomNum}.jpg`, caption: faker.random.word() + faker.date.past()})
+
 }
 
 const tags = [];
@@ -26,13 +27,13 @@ const samplePosts = [{
 	id: faker.random.number(5),
   name: faker.random.word(),
   description: faker.lorem.paragraphs(3),
-  imageUrl: photoArray,
-	reviews: faker.random.number(3),
-	rating: faker.random.number(1),
+  images: photoArray,
+	reviews: faker.random.number({min: 1, max: 999}),
+	rating: faker.random.number({min: 1, max: 5, precision: 0.01}),
 	tags: tags,
 	priceRange: {
-                start: faker.random.number(4),
-                end: faker.random.number(9)
+                start: faker.random.number({min: 3, max: 10}),
+                end: faker.random.number({min: 11, max: 30})
                 },
 	type: types
 }];

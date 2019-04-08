@@ -2,12 +2,13 @@ import React from 'React';
 import $ from 'jquery';
 
 $(document).ready(function(){
+  console.log('ready')
   $("a").on('click', function(event) {
     if (this.hash !== "") {
       event.preventDefault();
       var hash = this.hash;
       $('html, body').animate({
-        scrollTop: $(hash).offset().top - 45
+        scrollTop: $(hash).offset().top - 48
       }, 400, function(){
       });
     }

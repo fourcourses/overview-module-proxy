@@ -5,6 +5,12 @@ import Navbar from './Navbar.jsx';
 import Description from './Description.jsx';
 import Footer from './Footer.jsx';
 import Photos from './Photos.jsx';
+import Reservation from './Reservation.jsx';
+import Menu from './Menu.jsx';
+import Reviews from './Reviews.jsx';
+import Booking from './Booking.jsx';
+
+
 
 import $ from 'jquery';
 
@@ -34,27 +40,29 @@ class App extends React.Component {
         console.log('success', data)
         this.setState({
           restaurant: data[0],
-          images: data[0].imageUrl
+          images: data[0].images
         })
-        $('.headerImg').css('background', `url(${data[0].imageUrl[0]}) center center`)
+        $('.headerImg').css('background', `url(${data[0].images[0].imageUrl}) center center`)
+        $('.headerImg').css('background-size', 'cover');
       },
       error: () => {console.log('error')}
     })    
   }
 
   handleModal(e) {
-    console.log('Clicked', e.target.id)
     if(e.target.id !== "bookmark" && document.getElementById('myModal') !== null){
     document.getElementById('myModal').style.display = "block";
     this.setState({
-      currentImage: 0
+      currentImage: parseInt(e.target.id)
     })
     }
     if (e.target.id === "closeModal" && document.getElementById('closeModal') !== null){
       document.getElementById('myModal').style.display = "none";
+      this.setState({
+        currentImage: 0
+      })
     }
     if (e.target.id === "previousImage" && document.getElementById('previousImage') !== null){
-      console.log('Previous')
       if (this.state.currentImage === 0){
         this.setState({
           currentImage: this.state.images.length - 1
@@ -65,8 +73,6 @@ class App extends React.Component {
       })}
     }
     if (e.target.id === "nextImage" && document.getElementById('nextImage') !== null){
-      console.log('Next')
-      console.log(this.state.currentImage, this.state.images.length - 1)
       if (this.state.currentImage === this.state.images.length - 1){
         this.setState({
           currentImage: 0
@@ -89,25 +95,13 @@ class App extends React.Component {
           <div className="overview">
             <Navbar />
             <Description restaurant={this.state.restaurant}/>
-            <Photos />
-
-              <div className="foodmenu" id="menu">Menu
-              Category: Food<br></br>
-              One Food<br></br>
-              $30<br></br>
-              </div>
-
-              <div className="details" id="details">Details
-              there is parking outside<br></br>
-              is by the street<br></br>
-              buy one get one full price<br></br>
-              </div>
-
-              <div className="reviews" id="reviews">Non Shill Comments
-              hello<br></br>
-              wow very good and cool food<br></br>
-              this food was satisfying for my taste buds and it fulfills 1/3 of my daily calorie intake goals, yum!<br></br>
-              </div>
+            <Booking />
+            <Photos images={this.state.images} handleModal={this.handleModal}/>
+            <Menu />
+            <Reviews restaurant={this.state.restaurant} />
+          </div>
+          <div className="reservationContainer">
+          <Reservation />
           </div>
         </div>
         <Footer />
@@ -117,5 +111,6 @@ class App extends React.Component {
     )
   }
 }
+
 
 export default App;

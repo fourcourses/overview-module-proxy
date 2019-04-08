@@ -7,7 +7,9 @@ let resSchema = mongoose.Schema({
 	id: Number,
   name: String,
   description: String,
-  imageUrl: [String],
+  images: [
+    {imageUrl: String,
+     caption: String}],
 	reviews: Number,
 	rating: Number,
 	tags: [String],
