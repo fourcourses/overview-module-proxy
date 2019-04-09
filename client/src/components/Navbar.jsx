@@ -1,21 +1,20 @@
 import React from 'React';
 import $ from 'jquery';
 
-$(document).ready(function(){
-  console.log('ready')
-  $("a").on('click', function(event) {
-    if (this.hash !== "") {
-      event.preventDefault();
-      var hash = this.hash;
-      $('html, body').animate({
-        scrollTop: $(hash).offset().top - 48
-      }, 400, function(){
-      });
-    }
-  });
-});
-
 const Navbar = () => {
+  $(document).ready(function(){
+    console.log('ready')
+    $("a").on('click', function(event) {
+      if (this.hash !== "") {
+        event.preventDefault();
+        var hash = this.hash;
+        $('html, body').animate({
+          scrollTop: $(hash).offset().top - 48
+        }, 400, function(){
+        });
+      }
+    });
+  });
   return (
     <div className="menu">
     <nav>

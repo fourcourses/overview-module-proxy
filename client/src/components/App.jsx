@@ -10,8 +10,6 @@ import Menu from './Menu.jsx';
 import Reviews from './Reviews.jsx';
 import Booking from './Booking.jsx';
 
-
-
 import $ from 'jquery';
 
 class App extends React.Component {
@@ -21,19 +19,20 @@ class App extends React.Component {
       restaurant: null,
       currentImage: 0,
       restaurantId: 1,
-      images: null
+      images: null,
+      redirect: false
     }
     this.handleModal = this.handleModal.bind(this)
   }
 
   componentDidMount(){
-    this.getData()
+    this.getData();
   }
   
-
   getData() {
+    const rid = window.location.pathname.split('/')[2];
     return $.ajax({
-      url: `/restaurant?restaurant=${this.state.restaurantId}`,
+      url: `/api/restaurant/${rid}`,
       method: 'GET',
       dataType: 'json',
       success: (data) => {
@@ -44,8 +43,9 @@ class App extends React.Component {
         })
         $('.headerImg').css('background', `url(${data[0].images[0].imageUrl}) center center`)
         $('.headerImg').css('background-size', 'cover');
+        console.log('history', this.props.history)
       },
-      error: () => {console.log('error')}
+      error: () => {console.log('error client get request')}
     })    
   }
 
@@ -111,6 +111,5 @@ class App extends React.Component {
     )
   }
 }
-
 
 export default App;
