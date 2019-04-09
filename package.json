@@ -61,6 +61,7 @@
     "enzyme-to-json": "^3.3.5",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
     "faker": "^4.1.0",
+    "file-loader": "^3.0.1",
     "jest": "^24.6.0",
     "jest-cli": "^24.6.0",
     "mime": "^2.4.1",
