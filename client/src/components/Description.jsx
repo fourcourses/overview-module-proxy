@@ -1,43 +1,52 @@
 import React from 'react';
+import Tags from './Tags.jsx';
 
-const Description = (props) => {
+class Description extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = { 
+      ratingPercent: (this.props.restaurant.rating / 5) * 100,
+      read: false
+    }
+  }
+
+  toggleRead() {
+    console.log('clicked toggle')
+    this.setState({
+      read: !this.state.read
+    })
+  }
+
+
+  // var ratingPercent = (props.restaurant.rating / 5) * 100;
+  render() {
   return (
     <div>
-    <div className="name" id="overview">{props.restaurant.name}</div>
-    <div className="ratings">Rating: {props.restaurant.rating}, {props.restaurant.reviews} Reviews, ${props.restaurant.priceRange.start}-${props.restaurant.priceRange.end}, {props.restaurant.type[0]}</div>
-    <div className="tags">Tags: {props.restaurant.tags[0]}, {props.restaurant.tags[1]}
+    <div className="box1">
+    <h1 className="name" id="overview">{this.props.restaurant.name}</h1>
+    </div>
+
+    <div className="ratingsContainer">
+    <div className="stars" style={{marginLeft: 0 + 'px'}}>
+      <div className="ratings">
+        <div className="empty-stars"></div>
+        <div className="full-stars" style={{width: this.state.ratingPercent + '%'}}></div>
+        </div>
+      <div className="reviewNumber">&nbsp;&nbsp;{this.props.restaurant.rating.toFixed(1)}</div>
+    </div>
+
+    <div className="reviews"><img src="./images/icon1.png"/>&nbsp;&nbsp;{this.props.restaurant.reviews} reviews</div> 
+    <div className="priceRanger"><img src="./images/icon2.png"/>&nbsp;&nbsp;${this.props.restaurant.priceRange.start}-${this.props.restaurant.priceRange.end}</div>
+    <div className="types"><img src="./images/icon3.png"/>&nbsp;&nbsp;{this.props.restaurant.type[0]}</div>
+    </div>
+    <div className="tags"><Tags tags={this.props.restaurant.tags}/>
     </div>
 
 
-    <div className="description" id="description">{props.restaurant.description}
+    {this.state.read === false ? <div className="descriptionLess" id="description">{this.props.restaurant.description}</div> : <div className="descriptionMore" id="description">{this.props.restaurant.description}</div>}
+    {this.state.read === false ? <div className="read" onClick={() => this.toggleRead()}>+ Read More</div> : <div className="read" onClick={() => this.toggleRead()}>- Read Less</div>}
     </div>
-
-    <div className="photos" id="photos">PHOTOS
-
-    <br></br>
-    <img src="https://i.imgur.com/EkxXOVN.jpg" width="500"></img>
-    </div>
-    
-
-    <div className="foodmenu" id="menu">Menu
-    Category: Food<br></br>
-    One Food<br></br>
-    $30<br></br>
-    </div>
-
-    <div className="details" id="details">Details
-    there is parking outside<br></br>
-    is by the street<br></br>
-    buy one get one full price<br></br>
-    </div>
-
-    <div className="reviews" id="reviews">Non Shill Comments
-    hello<br></br>
-    wow very good and cool food<br></br>
-    this food was satisfying for my taste buds and it fulfills 1/3 of my daily calorie intake goals, yum!<br></br>
-    </div>
-    </div>
-  )
+  )}
 }
 
 export default Description;

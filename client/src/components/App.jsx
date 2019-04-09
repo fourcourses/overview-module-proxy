@@ -4,6 +4,11 @@ import Modal from './Modal.jsx';
 import Navbar from './Navbar.jsx';
 import Description from './Description.jsx';
 import Footer from './Footer.jsx';
+import Photos from './Photos.jsx';
+import Reservation from './Reservation.jsx';
+import Menu from './Menu.jsx';
+import Reviews from './Reviews.jsx';
+import Booking from './Booking.jsx';
 
 import $ from 'jquery';
 
@@ -12,45 +17,52 @@ class App extends React.Component {
     super(props);
     this.state = { 
       restaurant: null,
-      currentImage: 2,
+      currentImage: 0,
       restaurantId: 1,
-      images: ['https://i.imgur.com/i2FffSR.jpg', 'https://i.imgur.com/rd9yHKH.jpg', 'https://i.imgur.com/ocPGEcz.jpg', 'https://i.imgur.com/noBxGLl.jpg', 'https://i.imgur.com/yajIWRO.jpg']
+      images: null,
+      redirect: false
     }
     this.handleModal = this.handleModal.bind(this)
   }
 
   componentDidMount(){
-    this.getData()
+    this.getData();
   }
-
+  
   getData() {
-    $.ajax({
-      url: `/restaurant?restaurant=${this.state.restaurantId}`,
+    const rid = window.location.pathname.split('/')[2];
+    return $.ajax({
+      url: `/api/restaurant/${rid}`,
       method: 'GET',
       dataType: 'json',
       success: (data) => {
-      console.log('success', data)
-      this.setState({
-        restaurant: data[0]
-      })
-    },
-      error: () => {console.log('error')}
+        console.log('success', data)
+        this.setState({
+          restaurant: data[0],
+          images: data[0].images
+        })
+        $('.headerImg').css('background', `url(${data[0].images[0].imageUrl}) center center`)
+        $('.headerImg').css('background-size', 'cover');
+        console.log('history', this.props.history)
+      },
+      error: () => {console.log('error client get request')}
     })    
   }
 
   handleModal(e) {
-    console.log('Clicked', e.target.id)
-    if(e.target.id !== "bookmark"){
+    if(e.target.id !== "bookmark" && document.getElementById('myModal') !== null){
     document.getElementById('myModal').style.display = "block";
     this.setState({
-      currentImage: 0
+      currentImage: parseInt(e.target.id)
     })
     }
-    if (e.target.id === "closeModal"){
+    if (e.target.id === "closeModal" && document.getElementById('closeModal') !== null){
       document.getElementById('myModal').style.display = "none";
+      this.setState({
+        currentImage: 0
+      })
     }
-    if (e.target.id === "previousImage"){
-      console.log('Previous')
+    if (e.target.id === "previousImage" && document.getElementById('previousImage') !== null){
       if (this.state.currentImage === 0){
         this.setState({
           currentImage: this.state.images.length - 1
@@ -60,9 +72,7 @@ class App extends React.Component {
         currentImage: this.state.currentImage - 1
       })}
     }
-    if (e.target.id === "nextImage"){
-      console.log('Next')
-      console.log(this.state.currentImage, this.state.images.length - 1)
+    if (e.target.id === "nextImage" && document.getElementById('nextImage') !== null){
       if (this.state.currentImage === this.state.images.length - 1){
         this.setState({
           currentImage: 0
@@ -85,6 +95,13 @@ class App extends React.Component {
           <div className="overview">
             <Navbar />
             <Description restaurant={this.state.restaurant}/>
+            <Booking />
+            <Photos images={this.state.images} handleModal={this.handleModal}/>
+            <Menu />
+            <Reviews restaurant={this.state.restaurant} />
+          </div>
+          <div className="reservationContainer">
+          <Reservation />
           </div>
         </div>
         <Footer />
@@ -94,19 +111,5 @@ class App extends React.Component {
     )
   }
 }
-
-$(document).ready(function(){
-  console.log('test');
-  $("a").on('click', function(event) {
-    if (this.hash !== "") {
-      event.preventDefault();
-      var hash = this.hash;
-      $('html, body').animate({
-        scrollTop: $(hash).offset().top - 45
-      }, 400, function(){
-      });
-    }
-  });
-});
 
 export default App;

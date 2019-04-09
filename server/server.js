@@ -1,26 +1,23 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const db = require('../database/index.js');
-const port = 3000;
+const port = 3501;
 
 const app = express();
 
 app.listen(port, function() {
-  console.log(`listening on port ${port}`);
+  console.log(`4Group Overview Module listening on port ${port}`);
 });
 
 app.use(express.urlencoded());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.use(express.static(__dirname + '/../client/dist'));
 
-app.post('/repos', function (req, res) {
-  console.log('GOT POST REQUEST');
-});
+app.use('/', express.static(__dirname + '/../client/dist'));
+app.use('/restaurant/:rid', express.static(__dirname + '/../client/dist'));
 
-app.get('/restaurant', function (req, res) {
-  console.log('Get Request!', req.query.restaurant)
-  return db.search(req.query.restaurant)
-  .then(result => res.send(result));
+app.get('/api/restaurant/:rid', function (req, res) {
+  return db.search(req.params.rid)
+  .then(result => res.status(200).send(result))
 });
