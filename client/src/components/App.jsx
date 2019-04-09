@@ -5,7 +5,7 @@ import Navbar from './Navbar.jsx';
 import Description from './Description.jsx';
 import Footer from './Footer.jsx';
 import Photos from './Photos.jsx';
-import Reservation from './Reservation.jsx';
+// import Reservation from './Reservation.jsx';
 import Menu from './Menu.jsx';
 import Reviews from './Reviews.jsx';
 import Booking from './Booking.jsx';
@@ -36,16 +36,14 @@ class App extends React.Component {
       method: 'GET',
       dataType: 'json',
       success: (data) => {
-        console.log('success', data)
         this.setState({
           restaurant: data[0],
           images: data[0].images
         })
         $('.headerImg').css('background', `url(${data[0].images[0].imageUrl}) center center`)
         $('.headerImg').css('background-size', 'cover');
-        console.log('history', this.props.history)
       },
-      error: () => {console.log('error client get request')}
+      error: () => {console.log('Error client get request')}
     })    
   }
 
@@ -97,11 +95,11 @@ class App extends React.Component {
             <Description restaurant={this.state.restaurant}/>
             <Booking />
             <Photos images={this.state.images} handleModal={this.handleModal}/>
-            <Menu />
-            <Reviews restaurant={this.state.restaurant} />
+            {/* <Menu /> */}
+            {/* <Reviews restaurant={this.state.restaurant} /> */}
           </div>
           <div className="reservationContainer">
-          <Reservation />
+          {/* <Reservation /> */}
           </div>
         </div>
         <Footer />
