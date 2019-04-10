@@ -102,7 +102,7 @@ class App extends React.Component {
           {/* <Reservation /> */}
           </div>
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </div>
       : null }
       </div>
