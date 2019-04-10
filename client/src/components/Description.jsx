@@ -11,7 +11,6 @@ class Description extends React.Component {
   }
 
   toggleRead() {
-    console.log('clicked toggle')
     this.setState({
       read: !this.state.read
     })
@@ -35,9 +34,9 @@ class Description extends React.Component {
       <div className="reviewNumber">&nbsp;&nbsp;{this.props.restaurant.rating.toFixed(1)}</div>
     </div>
 
-    <div className="reviews"><img src="./images/icon1.png"/>&nbsp;&nbsp;{this.props.restaurant.reviews} reviews</div> 
-    <div className="priceRanger"><img src="./images/icon2.png"/>&nbsp;&nbsp;${this.props.restaurant.priceRange.start}-${this.props.restaurant.priceRange.end}</div>
-    <div className="types"><img src="./images/icon3.png"/>&nbsp;&nbsp;{this.props.restaurant.type[0]}</div>
+    <div className="reviews"><img src="/images/icon1.png"/>&nbsp;&nbsp;{this.props.restaurant.reviews} reviews</div> 
+    <div className="priceRanger"><img src="/images/icon2.png"/>&nbsp;&nbsp;${this.props.restaurant.priceRange.start}-${this.props.restaurant.priceRange.end}</div>
+    <div className="types"><img src="/images/icon3.png"/>&nbsp;&nbsp;{this.props.restaurant.type[0]}</div>
     </div>
     <div className="tags"><Tags tags={this.props.restaurant.tags}/>
     </div>

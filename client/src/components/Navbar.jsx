@@ -3,7 +3,6 @@ import $ from 'jquery';
 
 const Navbar = () => {
   $(document).ready(function(){
-    console.log('ready')
     $("a").on('click', function(event) {
       if (this.hash !== "") {
         event.preventDefault();

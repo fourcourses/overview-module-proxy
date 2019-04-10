@@ -23,7 +23,6 @@ let resSchema = mongoose.Schema({
 let Restaurant = mongoose.model('Restaurant', resSchema);
 
 let search = (id) => {
-  console.log('searching');
   return Restaurant.find({id: id}).sort().limit(25)
 }
 
