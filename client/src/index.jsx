@@ -6,5 +6,5 @@ import { handleModal } from './components/App.jsx';
 import style from './app.css';
 
 console.log(() => App.handleModal);
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('overview'));
 ReactDOM.render(<Header handleModal={() => App.handleModal}/>, document.getElementById('header'));
