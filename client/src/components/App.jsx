@@ -87,7 +87,7 @@ class App extends React.Component {
       <div>
       {this.state.restaurant !== null ? 
       <div>
-        <Header handleModal={this.handleModal} />
+        {/* <Header handleModal={this.handleModal} /> */}
         <Modal handleModal={this.handleModal} state={this.state}/>
         <div className="overview-container">
           <div className="overview">
@@ -111,3 +111,4 @@ class App extends React.Component {
 }
 
 export default App;
+
