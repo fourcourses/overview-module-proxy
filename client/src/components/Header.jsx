@@ -45,7 +45,7 @@ class Header extends React.Component {
   render () {
   return (
     <div>
-      <div class="search">
+      <div className="search">
   <img src="./images/topnavbar.png" width="100%"/>
 </div>
     <div className="headerDiv" onClick={(e) => this.handleModal(e)}>
