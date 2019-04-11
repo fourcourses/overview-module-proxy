@@ -14,8 +14,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 
-app.use('/', express.static(__dirname + '/../client/dist'));
-app.use('/restaurant/:rid', express.static(__dirname + '/../client/dist'));
+app.use('/', express.static(__dirname + '/../public/dist'));
+app.use('/restaurant/:rid', express.static(__dirname + '/../public/dist'));
 
 app.get('/api/restaurant/:rid', function (req, res) {
   return db.search(req.params.rid)
