@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const db = require('../database/index.js');
-const port = 3001;
+const port = 4000;
 
 const app = express();
 
@@ -20,4 +20,5 @@ app.use('/restaurant/:rid', express.static(__dirname + '/../public/dist'));
 app.get('/api/restaurant/:rid', function (req, res) {
   return db.search(req.params.rid)
   .then(result => res.status(200).send(result))
+  .catch(err => res.status(400));
 });

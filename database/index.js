@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
-const mongoUri = 'mongodb://localhost/opentable';
-const db = mongoose.connect(mongoUri);
+const mongoUri = 'mongodb://172.17.0.2/opentable';
+mongoose.connect(mongoUri);
+const db = mongoose.connection;
 mongoose.Promise = global.Promise;
 
 let resSchema = mongoose.Schema({ 
@@ -27,6 +28,6 @@ let search = (id) => {
 }
 
 
-module.exports = db;
-module.exports = Restaurant;
+module.exports.db = db;
+module.exports.Restaurant = Restaurant;
 module.exports.search = search;

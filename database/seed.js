@@ -1,5 +1,5 @@
-const db  = require('./index.js');
-const Restaurant = require('./index.js');
+const { db }  = require('./index.js');
+const { Restaurant } = require('./index.js');
 const faker = require('faker');
 
 
@@ -46,7 +46,7 @@ const samplePosts = [{
 
 const insertSampleBlogs = function() {
   Restaurant.create(samplePosts)
-    .then(() => db.disconnect());
+    .then(() => db.close());
 };
 
 insertSampleBlogs();
