@@ -8,8 +8,6 @@ node_modules/
 overview.pem
 overview2.pem
 bundle.js
-
-
 pids
 *.pid
 logs
