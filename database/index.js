@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const mongoUri = 'mongodb://172.17.0.2/opentable';
+const mongoUri = 'mongodb://localhost/opentable';
 mongoose.connect(mongoUri);
 const db = mongoose.connection;
 mongoose.Promise = global.Promise;
