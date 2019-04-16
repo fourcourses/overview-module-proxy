@@ -7,6 +7,8 @@ npm-debug.log
 node_modules/
 overview.pem
 overview2.pem
+bundle.js
+
 
 pids
 *.pid
@@ -24,5 +26,5 @@ coverage
 
 # Compiled Dirs (http://nodejs.org/api/addons.html)
 build/
-dist/
+
 
