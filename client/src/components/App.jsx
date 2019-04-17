@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import Header from './Header.jsx';
 import Modal from './Modal.jsx';
 import Navbar from './Navbar.jsx';
