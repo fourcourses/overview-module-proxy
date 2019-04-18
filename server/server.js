@@ -22,3 +22,21 @@ app.get('/api/restaurant/:rid', function (req, res) {
   .then(result => res.status(200).send(result))
   .catch(err => res.status(400));
 });
+
+app.post('/api/restaurant/:rid', function (req, res) {
+  return db.search(req.params.rid)
+  .then(result => res.status(200).send(result))
+  .catch(err => res.status(400));
+});
+
+app.patch('/api/restaurant/:rid', function (req, res) {
+  return db.search(req.params.rid)
+  .then(result => res.status(200).send(result))
+  .catch(err => res.status(400));
+});
+
+app.delete('/api/restaurant/:rid', function (req, res) {
+  return db.search(req.params.rid)
+  .then(result => res.status(200).send(result))
+  .catch(err => res.status(400));
+});
