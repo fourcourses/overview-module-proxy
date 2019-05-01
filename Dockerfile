@@ -8,11 +8,9 @@ COPY . /src/app
 
 RUN npm install
 
-RUN npm run seed
-
 # RUN yarn global add nodemon
 
-EXPOSE 4000
+EXPOSE 4001
 
 CMD [ "npm", "run", "start" ]
 
